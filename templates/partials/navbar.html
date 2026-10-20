@@ -1,0 +1,13 @@
+{% load static %}
+<nav class="site-nav" aria-label="Navegación principal">
+  <div class="shell nav-inner">
+    <a class="brand" href="{% url 'portfolio:home' %}" aria-label="Inicio, Facundo Seiber">FS<span class="brand-dot">.</span></a>
+    <button class="menu-button" type="button" aria-controls="main-menu" aria-expanded="false">Menú <span aria-hidden="true">☰</span></button>
+    <div class="nav-links" id="main-menu">
+      <a href="{% url 'portfolio:home' %}#proyectos">Proyectos</a>
+      <a href="{% url 'portfolio:home' %}#sobre-mi">Sobre mí</a>
+      <a href="{% url 'blog:posts' %}">Publicaciones</a>
+      <a class="nav-cv" href="{% static 'portfolio/cv.pdf' %}" download>Descargar CV <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</nav>

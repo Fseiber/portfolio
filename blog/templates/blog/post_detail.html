@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ post.title }} · Facundo Seiber{% endblock %}
+
+{% block content %}
+<article class="article shell reveal">
+  <a href="{% url 'blog:posts' %}" class="back-link">← Volver a publicaciones</a>
+  <p class="eyebrow">PUBLICACIÓN / <span class="mono">{{ post.date|date:"d.m.Y" }}</span></p>
+  <h1>{{ post.title }}</h1>
+  <p class="article-date mono">{{ post.date|date:"d.m.Y" }}</p>
+  {% if post.image %}<img src="{{ post.image.url }}" alt="Imagen de {{ post.title }}" loading="lazy" width="1200" height="675">{% endif %}
+  <div class="article-content">{{ post.description|safe }}</div>
+</article>
+{% endblock %}

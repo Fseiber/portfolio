@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Publicaciones · Facundo Seiber{% endblock %}
+
+{% block content %}
+<header class="page-header shell reveal"><p class="eyebrow">03 / PUBLICACIONES</p><h1>Notas y aprendizajes.</h1><p>Ideas, procesos y cosas que voy descubriendo mientras construyo software.</p></header>
+<section class="section shell reveal">
+  <div class="posts-list posts-list-full">
+    {% for post in posts %}<article class="post-row post-card"><time class="mono" datetime="{{ post.date|date:'Y-m-d' }}"{% if post.external_url %} title="Agregado al portafolio"{% endif %}>{{ post.date|date:"d.m.Y" }}</time><div><h2>{{ post.title }}</h2><p>{{ post.description|striptags|truncatechars:180 }}</p></div><a href="{{ post.get_absolute_url }}"{% if post.external_url %} target="_blank" rel="noopener noreferrer"{% endif %} aria-label="Leer {{ post.title }}{% if post.external_url %} (sitio externo, nueva pestaña){% endif %}">{% if post.external_url %}Ver publicación{% else %}Leer{% endif %} <span aria-hidden="true">↗</span></a></article>
+    {% empty %}<p class="empty-state">Todavía no hay publicaciones.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}
