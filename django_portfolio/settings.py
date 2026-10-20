@@ -31,7 +31,18 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "ALLOWED_HOSTS", "localhost,127.0.0.1,[::1],portfolio-agro-soft.vercel.app"
+    ).split(",")
+    if host.strip()
+]
+# Vercel supplies the deployment host and the project's production domain.
+for variable in ("VERCEL_URL", "VERCEL_PROJECT_PRODUCTION_URL"):
+    host = os.getenv(variable, "").strip()
+    if host and host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(host)
 
 
 # Application definition
@@ -123,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Archivos multimedia (imágenes subidas desde el admin)
 MEDIA_ROOT = BASE_DIR / "media"
